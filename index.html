@@ -7,55 +7,23 @@
 <style>
 body {
     margin: 0;
-    overflow: hidden;
-    font-family: 'Segoe UI', sans-serif;
-    background: radial-gradient(circle at bottom, #ff9a9e, #1e3c72);
+    background: black;
     color: white;
+    font-family: sans-serif;
     text-align: center;
 }
 
-/* TEXT CINEMATIC */
 .text {
     position: absolute;
     top: 40%;
     width: 100%;
-    font-size: 32px;
+    font-size: 30px;
     opacity: 0;
-    transition: opacity 2s;
+    transition: 1s;
 }
 
-/* ACTIVE TEXT */
 .show {
     opacity: 1;
-}
-
-/* PARTICLE */
-.sparkle {
-    position: absolute;
-    width: 4px;
-    height: 4px;
-    background: white;
-    border-radius: 50%;
-    animation: float 5s linear infinite;
-}
-
-@keyframes float {
-    from { transform: translateY(100vh); opacity: 0;}
-    to { transform: translateY(-10vh); opacity: 1;}
-}
-
-/* ENDING */
-.end {
-    position: absolute;
-    top: 35%;
-    width: 100%;
-    font-size: 36px;
-    animation: fadeIn 3s;
-}
-
-@keyframes fadeIn {
-    from {opacity:0;}
-    to {opacity:1;}
 }
 </style>
 </head>
@@ -64,18 +32,15 @@ body {
 
 <div id="text" class="text"></div>
 
-<audio autoplay loop>
-<source src="https://www.bensound.com/bensound-music/bensound-slowmotion.mp3">
-</audio>
-
 <script>
-const nama = prompt("keysa ❤️:");
+try {
+    const nama = prompt("Keysa ❤️:") || "Kamu";
 
-const textEl = document.getElementById("text");
+    const textEl = document.getElementById("text");
 
-const cerita = [
-    "Hai " + keysa + " ❤️",
-    "Aku gak nyangka...",
+    const cerita = [
+        "Hai " + keysa + " ❤️",
+        "Aku gak nyangka...",
     "Kalau seseorang bisa bikin aku sebahagia ini 😊",
     "Dari hal kecil...",
     "Sampai momen yang gak akan aku lupa 💕",
@@ -94,47 +59,28 @@ const cerita = [
     "Dan itu lebih dari cukup buat aku",
     "Aku sayang kamu ❤️",
     "Selamanya ya? janji boleh tidak? 💍"
-];
+    ];
 
-let i = 0;
+    let i = 0;
 
-function showText() {
-    if (i >= cerita.length) {
-        ending();
-        return;
+    function showText() {
+        if (i >= cerita.length) return;
+
+        textEl.classList.remove("show");
+
+        setTimeout(() => {
+            textEl.innerHTML = cerita[i];
+            textEl.classList.add("show");
+            i++;
+        }, 300);
+
+        setTimeout(showText, 2500);
     }
 
-    textEl.classList.remove("show");
+    showText();
 
-    setTimeout(() => {
-        textEl.innerHTML = cerita[i];
-        textEl.classList.add("show");
-        i++;
-    }, 500);
-
-    setTimeout(showText, 3500);
-}
-
-setTimeout(showText, 1000);
-
-/* PARTICLE */
-function sparkle(){
-    const s = document.createElement("div");
-    s.className = "sparkle";
-    s.style.left = Math.random()*window.innerWidth+"px";
-    document.body.appendChild(s);
-    setTimeout(()=>s.remove(),5000);
-}
-setInterval(sparkle,200);
-
-/* ENDING */
-function ending(){
-    document.body.innerHTML = `
-        <div class="end">
-            <h1>I LOVE YOU ${keysa} ❤️</h1>
-            <p>Kamu segalanya buat aku 💖</p>
-        </div>
-    `;
+} catch (e) {
+    document.body.innerHTML = "<h1>Error terjadi 😢</h1><p>" + e + "</p>";
 }
 </script>
 
