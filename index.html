@@ -13,6 +13,7 @@ body {
     text-align: center;
 }
 
+/* TEXT */
 .text {
     position: absolute;
     top: 40%;
@@ -33,14 +34,14 @@ body {
 <div id="text" class="text"></div>
 
 <script>
-try {
-    const nama = prompt("nama dia ❤️:") || "Kamu";
+// 🔥 FIX TOTAL
+const nama = prompt("Nama dia ❤️:") || "Kamu";
 
-    const textEl = document.getElementById("text");
+const textEl = document.getElementById("text");
 
-    const cerita = [
-        "Hai " + nama + " ❤️",
-        "Aku gak nyangka...",
+const cerita = [
+    "Hai " + nama + " ❤️",
+     "Aku gak nyangka...",
     "Kalau seseorang bisa bikin aku sebahagia ini 😊",
     "Dari hal kecil...",
     "Sampai momen yang gak akan aku lupa 💕",
@@ -59,29 +60,25 @@ try {
     "Dan itu lebih dari cukup buat aku",
     "Aku sayang kamu ❤️",
     "Selamanya ya? janji boleh tidak? 💍"
-    ];
+];
 
-    let i = 0;
+let i = 0;
 
-    function showText() {
-        if (i >= cerita.length) return;
+function showText() {
+    if (i >= cerita.length) return;
 
-        textEl.classList.remove("show");
+    textEl.classList.remove("show");
 
-        setTimeout(() => {
-            textEl.innerHTML = cerita[i];
-            textEl.classList.add("show");
-            i++;
-        }, 300);
+    setTimeout(() => {
+        textEl.innerHTML = cerita[i];
+        textEl.classList.add("show");
+        i++;
+    }, 300);
 
-        setTimeout(showText, 2500);
-    }
-
-    showText();
-
-} catch (e) {
-    document.body.innerHTML = "<h1>Error terjadi 😢</h1><p>" + e + "</p>";
+    setTimeout(showText, 2500);
 }
+
+showText();
 </script>
 
 </body>
